@@ -1,23 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Card from '../components/Card'
 
 export default function Home() {
-  const [ count, setCount ] = useState(0)
-  const [ todolist, setTodoList ] = useState(["1", "2", "3"])
-  const [ input, setInput ] = useState ('')
-  const [ editabledTodo, setEditabledTodo ] = useState(null)
 
-  const editTask = (item, index) => {
-    setEditabledTodo(index);
-  }
 
-  const handleChange = e => {
-    let newTodoList = [...todolist]
-    newTodoList[editabledTodo] = e.target.value
-    setTodoList(newTodoList)
-  }
 
   return (
     <div className={styles.container}>
@@ -28,29 +17,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1> Hello </h1>
-        <h3> count: {count} </h3>
-        <button onClick={() => setCount( count + 1 )}> click </button>
-
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
-        <button onClick={() => setTodoList(e => [...e, input])}>Add</button>
-
-
-        { todolist.length > 0 && (
-          todolist.map((todo, i) => {
-            return (
-            <div key={i}>
-              <input  defaultValue={todo} onChange={(e) => handleChange(e) } disabled={editabledTodo === i ? false : true}/>
-              <button onClick={() => editTask(todo, i)}> Modify </button>
-              <button onClick={() => 
-                setTodoList(prevArray => prevArray.filter( (item, index) => index !== i))
-              }> Delete </button>
-            </div>
-            )
-          })
-          
-        )}
-
+        <h1 > Hello </h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <p>Marketplace</p>
+          <p>Menu</p>
+          <button> Login </button>
+        </div>
+        <section style={{display: 'flex', justifyContent: 'center'}}>
+        <Card title="test" desc="description" image="https://images.unsplash.com/photo-1639160570277-1c74383a6ec8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8ZWRRT21paGVVdFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" price="30" />
+        <Card title="test2" desc="description" image="https://images.unsplash.com/photo-1639160570277-1c74383a6ec8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8ZWRRT21paGVVdFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" price="30" />
+        <Card title="test3" desc="description" image="https://images.unsplash.com/photo-1639160570277-1c74383a6ec8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8ZWRRT21paGVVdFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" price="30" />
+        <Card title="test4" desc="description" image="https://images.unsplash.com/photo-1639160570277-1c74383a6ec8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8ZWRRT21paGVVdFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" price="30" />
+        </section>
       </main>
 
     </div>
