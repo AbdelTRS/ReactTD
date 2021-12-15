@@ -7,6 +7,16 @@ export default function Home() {
   const [ count, setCount ] = useState(0)
   const [ todolist, setTodoList ] = useState(["1", "2", "3"])
   const [ input, setInput ] = useState ('')
+  const [ editabledTodo, setEditabledTodo ] = useState(null)
+
+  const editTask = (item, index) => {
+    setEditabledTodo(index);
+  }
+
+  const handleChange = e => {
+    todolist[editabledTodo] = e.target.value
+    setTodoList(todolist)
+  }
 
   return (
     <div className={styles.container}>
@@ -25,12 +35,21 @@ export default function Home() {
         <button onClick={() => setTodoList(e => [...e, input])}>Add</button>
 
 
-        { todolist.length > 1 && (
+        { todolist.length > 0 && (
           todolist.map((todo, i) => {
             return (
-            <p key={i}> {todo} </p>)
+            <div key={i}>
+              <input  defaultValue={todo} onChange={(e) => handleChange(e) } disabled={editabledTodo === i ? false : true}/>
+              <button onClick={() => editTask(todo, i)}> Modify </button>
+              <button onClick={() => 
+                setTodoList(prevArray => prevArray.filter( (item, index) => index !== i))
+              }> Delete </button>
+            </div>
+            )
           })
+          
         )}
+
       </main>
 
     </div>
