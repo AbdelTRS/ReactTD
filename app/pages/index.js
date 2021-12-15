@@ -14,8 +14,9 @@ export default function Home() {
   }
 
   const handleChange = e => {
-    todolist[editabledTodo] = e.target.value
-    setTodoList(todolist)
+    let newTodoList = [...todolist]
+    newTodoList[editabledTodo] = e.target.value
+    setTodoList(newTodoList)
   }
 
   return (
